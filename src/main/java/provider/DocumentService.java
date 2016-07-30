@@ -1,15 +1,26 @@
 package provider;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import entity.Document;
-import java.util.concurrent.atomic.AtomicLong;
+import repositories.DocumentRepository;
 
 public class DocumentService implements IDocumentService {
-	private static final String template = "Hello Hello, %s!";
-	private final AtomicLong counter = new AtomicLong();
+	private final String template = "Hello Hello %s.";
+	
+	private final DocumentRepository repository;
+	
+	@Autowired
+	public DocumentService (DocumentRepository documentRepository) {
+		repository = documentRepository;
+	}
 	
 	public Document SayGreeting(String name) {
-		 return new Document(counter.incrementAndGet(),
-                 String.format(template, name));
+		Document document = new Document();
+		document.setContent(String.format(template, name));
+		repository.save(document);
+		
+		return document;
 	}
 
 }
