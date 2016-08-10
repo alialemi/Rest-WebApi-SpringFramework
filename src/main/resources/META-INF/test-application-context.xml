@@ -10,34 +10,27 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.8.xsd">
 	<context:component-scan base-package="controller" />
+	
 	<mvc:annotation-driven />
-	
-	<!-- Dependency Management -->
-	<bean id="IDocumentService" class="provider.DocumentService" />
-	
-	
-	<!-- Database configuration -->
-	<bean name="dataSource"
-		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/Docusign" />
-		<property name="username" value="Docuorg" />
-		<property name="password" value="Docuorg_123$" />
-	</bean>
 
+	<bean id="IDocumentService" class="provider.DocumentService" />
+
+	<!-- Embedded Database for unit testing purposes -->
+	<jdbc:embedded-database id="test-dataSource" type="H2"></jdbc:embedded-database>
+	
 	<!-- Entity Manager -->
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<property name="persistenceUnitName" value="persistenceUnit" />
+		<property name="dataSource" ref="test-dataSource" />
+		<property name="persistenceUnitName" value="test-persistenceUnit" />
 	</bean>
 
 	<!-- Transaction Manager -->
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-
-	<!-- JPA repository location -->
+	
+	<!--  JPA repository location -->
 	<jpa:repositories base-package="repositories"></jpa:repositories>
-
+	
 </beans>

@@ -5,5 +5,5 @@ import entity.Document;
 
 public interface DocumentRepository extends JpaRepository<Document, Long> 
 {
-
+	
 }
