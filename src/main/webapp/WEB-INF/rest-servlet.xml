@@ -20,7 +20,7 @@
 	<bean name="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/Docusign" />
+		<property name="url" value="jdbc:mysql://localhost:3306/Docuorg" />
 		<property name="username" value="Docuorg" />
 		<property name="password" value="Docuorg_123$" />
 	</bean>

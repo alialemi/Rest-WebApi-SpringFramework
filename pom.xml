@@ -22,7 +22,7 @@
 			<version>2.5</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -76,6 +76,17 @@
 	</dependencies>
 	<build>
 		<finalName>services</finalName>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<url>http://localhost:8080/manager/text</url>
+					<path>/services</path>
+				</configuration>
+			</plugin>
+		</plugins>
 	</build>
 </project>
 
